@@ -1,0 +1,43 @@
+# Created by: Bartek Kowalski
+# date started: October 8 2020
+# date modified: October 2020
+# takes any reasonable number and finds the binary equivalent, as well as the number of bits it would take.
+
+number = int(input("Enter a number under a reasonable amount: "))
+a = number
+exponent = 0
+while a != 1:
+    if a % 2 == 0:
+        a = a/2
+        exponent = exponent+1
+    else:
+        a = a-1
+powers = []
+i = exponent
+for i in range(0, exponent+1):
+    powers.append(2**i)
+    i = i-1
+powers.reverse()
+# above finds the list needed for the bits to be found
+
+x = 0
+final = []
+while x != len(powers)-1:
+    if x >= len(powers):
+        break
+    elif number >= powers[x]:
+        final.append(1)
+        number = number - powers[x]
+        x = x+1
+    else:
+        x = x+1
+        final.append(0)
+if number == 1:
+    final.append(1)
+# above finds the final binary equivalent for the number
+
+for num in final:
+    print(num, end='')
+print("\nYour number is " + str(len(powers)) + " bits long")
+
+
